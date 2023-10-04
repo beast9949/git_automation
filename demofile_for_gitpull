@@ -1,31 +1,33 @@
 pipeline {
-   agent {
+    agent any
 
+    environment {
+        GIT_HOME = "/home/Beast9949/git"
+        GIT_URL = "https://github.com/beast9949/git_automation.git"
+        CLIENT = "your_client_name" // Replace with your actual client name
+        SERVER_NAME = "your_server_name" // Replace with your actual server name
     }
-{
 
-        environment {
-                                GIT_HOME="/home/Beast9949/git"
-                                GIT_URL="https://github.com/beast9949/git_automation.git"
-  }
     stages {
+        stage('Pulling code ...') {
+            steps {
+                script {
+                    // Define the directory where you want to pull the code
+                    def codeDir = "${GIT_HOME}/Beast9949/demofile_for_gitpull/"
 
-       stage('Pulling code ...') {
-          steps {
-            sh '''
+                    // Change to the specified directory
+                    dir(codeDir) {
+                        // Pull the code from the GIT_URL
+                        sh "git pull ${GIT_URL}"
 
-            cd ${GIT_HOME}/Beast9949/demofile for gitpull/
-            git pull ${GIT_URL}
-              #git add ${GIT_HOME}/inferyx/platform-license/license/${CLIENT}/${SERVER_NAME}/
-              #git commit -m "${CLIENT} updated"
-              #git stash
-              #git pull ${GIT_URL} master
-
-              '''
-          }
+                        // Optionally, you can add, commit, and push changes if needed
+                        // sh "git add ."
+                        // sh "git commit -m '${CLIENT} updated'"
+                        // sh "git stash"
+                        // sh "git pull ${GIT_URL} master"
+                    }
+                }
+            }
         }
+    }
 }
-
-
-
-
