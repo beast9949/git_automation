@@ -1,0 +1,31 @@
+pipeline {
+   agent {
+
+    }
+{
+
+        environment {
+                                GIT_HOME="/home/Beast9949/git"
+                                GIT_URL="https://github.com/beast9949/git_automation.git"
+  }
+    stages {
+
+       stage('Pulling code ...') {
+          steps {
+            sh '''
+
+            cd ${GIT_HOME}/Beast9949/demofile for gitpull/
+            git pull ${GIT_URL}
+              #git add ${GIT_HOME}/inferyx/platform-license/license/${CLIENT}/${SERVER_NAME}/
+              #git commit -m "${CLIENT} updated"
+              #git stash
+              #git pull ${GIT_URL} master
+
+              '''
+          }
+        }
+}
+
+
+
+
