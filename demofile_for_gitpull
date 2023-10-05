@@ -11,15 +11,15 @@ pipeline {
         GIT_URL = "https://beast9949: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github.com/beast9949/git_automation.git"
     }
 
-    stages {
-        /*
-        stage('Checkout') {
-            steps {
-                // Checkout the code from your GitHub repository
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/beast9949/git_automation.git']]])
-            }
-        }
-        */
+  //  stages {
+     //   /*
+   //     stage('Checkout') {
+   //         steps {
+   //             // Checkout the code from your GitHub repository
+   //             checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url 'https://github.com/beast9949/git_automation.git']]])
+     //       }
+       // }
+    //    */
 
         stage('Pull and push from GitHub') {
             steps {
