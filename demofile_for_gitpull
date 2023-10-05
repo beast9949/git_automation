@@ -1,2 +1,63 @@
-echo "demo testing"
-pwd
+pipeline {
+    agent any
+
+    parameters {
+     
+        string(name: 'TAG_NAME', defaultValue: '', description: 'Enter the tag name')environment {
+                                GIT_HOME="/home/inferyx/git"
+                                GIT_URL="https://ginferyx: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@github.com/inferyx/platform-license.git"
+  }
+         environment {
+                                GIT_HOME="/home/beast9949/git"
+                                GIT_URL="github.com/beast9949/git_automation.git"
+  }
+    }
+
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from your GitHub repository
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/beast9949/git_automation.git']]])
+            }
+        }
+
+        stage('Pull and push from GitHub') {
+            steps {
+                sh '''
+		cd /root/dir1/git_automation
+		git pull origin main
+		
+		'''
+
+      
+            }
+        }
+
+        stage('Create and push a tag') {
+            steps {
+
+                script {
+                    def userInput = input(
+                        id: 'userInput',
+                        message: 'Enter the tag name:',
+                        parameters: [string(defaultValue: '', description: 'Tag Name', name: 'TAG_NAME')],
+                        
+                    )
+
+                    if (userInput.TAG_NAME) {
+                        sh "git tag -a ${userInput.TAG_NAME} -m 'Version ${userInput.TAG_NAME}'"
+                        sh "echo ${PASSWORD} | git push origin --tags"
+                    } else {
+                        error('Tag name not provided. Tagging aborted.')
+                    }
+                }
+            }
+        }
+
+        stage('Pull a tag') {
+            steps {
+                sh 'git fetch --tags'
+                sh "git checkout ${TAG_NAME}"
+            }
+        }
