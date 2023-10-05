@@ -7,15 +7,15 @@ pipeline {
 
     environment {
         GIT_HOME = "/home/beast9949/git"
-        GIT_URL = "https://github.com/beast9949/git_automation.git" 
-        PASSWORD = "Yogi@github001" 
+        GIT_URL = "https://beast9949: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github.com/beast9949/git_automation.git" 
+       
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the code from your GitHub repository
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[https://github.com/beast9949/git_automation.git]]])
+             // Checkout the code from your GitHub repository
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs:   [[https://github.com/beast9949/git_automation.git]]])
             }
         }
 
@@ -40,8 +40,10 @@ pipeline {
                     if (userInput.TAG_NAME) {
                         sh "cd /root/dir1/git_automation
                         sh "git tag -a ${userInput.TAG_NAME} -m 'Version ${userInput.TAG_NAME}'"
-                        sh "echo ${PASSWORD} | git push origin --tags"
-                    } else {
+                        sh " git push origin --tags"
+                    } 
+
+                         else {
                         error('Tag name not provided. Tagging aborted.')
                     }
                 }
@@ -56,4 +58,3 @@ pipeline {
         }
     }
 }
-
