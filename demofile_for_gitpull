@@ -3,24 +3,25 @@ pipeline {
 
     parameters {
         string(name: 'TAG_NAME', defaultValue: '', description: 'Enter the tag name')
-        BRANCH_NAME=main
+        BRANCH_NAME = 'main'
     }
 
     environment {
         GIT_HOME = "/home/beast9949/git"
-        GIT_URL = "https://beast9949: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github.com/beast9949/git_automation.git" 
-        
+        GIT_URL = "https://beast9949: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github.com/beast9949/git_automation.git"
     }
 
-  //  stages {
-  //      stage('Checkout') {
-  //          steps {
-  //           // Checkout the code from your GitHub repository
-  //              checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs:   [[https://github.com/beast9949/git_automation.git]]])
-   //         }
-   //     }
+    stages {
+        /*
+        stage('Checkout') {
+            steps {
+                // Checkout the code from your GitHub repository
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/beast9949/git_automation.git']]])
+            }
+        }
+        */
 
-    stage('Pull and push from GitHub') {
+        stage('Pull and push from GitHub') {
             steps {
                 sh '''
                     cd /root/dir1/git_automation
@@ -29,27 +30,22 @@ pipeline {
             }
         }
 
-
-       stage('git checkout') {
+        stage('Git checkout') {
             steps {
                 sh '''
                     cd /root/dir1/git_automation
-		if($BRANCH_NAME != "main"){
-                    git checkout $BRANCH_NAME
-		}
+                    if [ "$BRANCH_NAME" != "main" ]; then
+                        git checkout $BRANCH_NAME
+                    fi
                 '''
             }
         }
 
-
-       stage('Pull and push from GitHub') {
+        stage('Pull and push from GitHub (Main Branch)') {
             steps {
-                sh '''
+                sh  '''
                     cd /root/dir1/git_automation
-			
                     git pull origin main
-
-      
                 '''
             }
         }
@@ -64,12 +60,10 @@ pipeline {
                     )
 
                     if (userInput.TAG_NAME) {
-                        sh "cd /root/dir1/git_automation
+                        sh "cd /root/dir1/git_automation"
                         sh "git tag -a ${userInput.TAG_NAME} -m 'Version ${userInput.TAG_NAME}'"
-                        sh " git push origin --tags"
-                    } 
-
-                         else {
+                        sh "git push origin --tags"
+                    } else {
                         error('Tag name not provided. Tagging aborted.')
                     }
                 }
