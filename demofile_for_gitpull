@@ -15,6 +15,7 @@ pipeline {
             steps {
                 sh '''
                    whoami
+                    su jenkins
                     cd /root/dir1/git_automation
                     git pull origin $BRANCH_NAME
                 '''
