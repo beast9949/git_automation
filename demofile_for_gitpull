@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         string(name: 'TAG_NAME', defaultValue: '', description: 'Enter the tag name')
-        BRANCH_NAME="main"
+        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Enter the branch name')
     }
 
     environment {
