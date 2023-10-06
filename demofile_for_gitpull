@@ -15,7 +15,7 @@ pipeline {
             steps {
                 sh '''
                      whoami
-                     cd /root/dir1/git_automation
+                     $WORKSPACE
                      git pull origin $BRANCH_NAME
                 '''
             }
