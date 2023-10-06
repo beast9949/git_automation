@@ -18,7 +18,7 @@ pipeline {
                      $WORKSPACE
                     git branch
                     git checkout $BRANCH_NAME
-                     git pull origin $BRANCH_NAME
+                     git pull $BRANCH_NAME
                 '''
             }
         }
