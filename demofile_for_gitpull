@@ -15,7 +15,7 @@ pipeline {
             steps {
                 sh '''
                      whoami
-                     $WORKSPACE
+                     cd /root/dir1/git_automation
                      git pull origin $BRANCH_NAME
                 '''
             }
@@ -24,7 +24,7 @@ pipeline {
         stage('Git checkout') {
             steps {
                 sh '''
-                    $WORKSPACE
+                    cd /root/dir1/git_automation
                     if [ "$BRANCH_NAME" != "main" ]; then
                     git checkout $BRANCH_NAME
                     fi
@@ -35,7 +35,7 @@ pipeline {
         stage('Pull and push from GitHub (Main Branch)') {
             steps {
                 sh  '''
-                    $WORKSPACE
+                    cd /root/dir1/git_automation
                     git pull origin main
                 '''
             }
