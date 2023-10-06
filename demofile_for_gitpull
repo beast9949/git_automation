@@ -16,6 +16,7 @@ pipeline {
                 sh '''
                      whoami
                      $WORKSPACE
+                    ls -lsrt
                     git branch
                     git checkout $BRANCH_NAME
                      git pull $BRANCH_NAME
