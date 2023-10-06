@@ -14,10 +14,9 @@ pipeline {
        stage('Pull and push from GitHub') {
             steps {
                 sh '''
-                   whoami
-                    su jenkins
-                    cd /root/dir1/git_automation
-                    git pull origin $BRANCH_NAME
+                     sudo whoami
+                     sudo cd /root/dir1/git_automation
+                   sudo git pull origin $BRANCH_NAME
                 '''
             }
         }
@@ -25,9 +24,9 @@ pipeline {
         stage('Git checkout') {
             steps {
                 sh '''
-                    cd /root/dir1/git_automation
+                    sudo cd /root/dir1/git_automation
                     if [ "$BRANCH_NAME" != "main" ]; then
-                        git checkout $BRANCH_NAME
+                    sudo  git checkout $BRANCH_NAME
                     fi
                 '''
             }
@@ -36,8 +35,8 @@ pipeline {
         stage('Pull and push from GitHub (Main Branch)') {
             steps {
                 sh  '''
-                    cd /root/dir1/git_automation
-                    git pull origin main
+                    sudo cd /root/dir1/git_automation
+                    sudo git pull origin main
                 '''
             }
         }
@@ -52,9 +51,9 @@ pipeline {
                     )
 
                     if (userInput.TAG_NAME) {
-                        sh "cd /root/dir1/git_automation"
-                        sh "git tag -a ${userInput.TAG_NAME} -m 'Version ${userInput.TAG_NAME}'"
-                        sh "git push origin --tags"
+                        sh " sudo cd /root/dir1/git_automation"
+                        sh " sudo git tag -a ${userInput.TAG_NAME} -m 'Version ${userInput.TAG_NAME}'"
+                        sh " sudo git push origin --tags"
                     } else {
                         error('Tag name not provided. Tagging aborted.')
                     }
@@ -64,8 +63,8 @@ pipeline {
 
         stage('Pull a tag') {
             steps {
-                sh 'git fetch --tags'
-                sh "git checkout ${TAG_NAME}"
+                sh 'sudo git fetch --tags'
+                sh "sudo git checkout ${TAG_NAME}"
             }
         }
     }
