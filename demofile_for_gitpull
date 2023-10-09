@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         string(name: 'TAG_NAME', defaultValue: '', description: 'Enter the tag name')
-        string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'master')
+        string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'Enter the branch name')
     }
 
     environment {
@@ -58,16 +58,12 @@ pipeline {
         stage('Create and push a tag') {
             steps {
                 script {
-                    def userInput = input(
-                        id: 'userInput',
-                        message: 'Enter the tag name:',
-                        parameters: [string(defaultValue: '', description: 'Tag Name', name: 'TAG_NAME')],
-                    )
+                    def tagName = params.TAG_NAME.trim()
 
-                    if (userInput.TAG_NAME) {
+                    if (tagName) {
                         sh "cd /yogi/git_automation"
-                        sh "git tag -a ${userInput.TAG_NAME} -m 'Version ${userInput.TAG_NAME}'"
-                        sh "git push origin --tags"
+                        sh "git tag -a ${tagName} -m 'Version ${tagName}'"
+                        sh "git push origin ${tagName}"
                     } else {
                         error('Tag name not provided. Tagging aborted.')
                     }
@@ -80,7 +76,7 @@ pipeline {
                 sh '''
                     cd /yogi/git_automation
                     git fetch --tags
-                    git checkout ${TAG_NAME}
+                    git checkout ${params.TAG_NAME}
                 '''
             }
         }
