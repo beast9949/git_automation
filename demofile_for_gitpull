@@ -64,19 +64,17 @@ pipeline {
                         parameters: [string(defaultValue: '', description: 'Tag Name', name: 'TAG_NAME')],
                     )
 
-                      if (userInput.TAG_NAME) {
-                def tagName = userInput.TAG_NAME.trim() // Trim leading/trailing spaces
+                    if (userInput.TAG_NAME) {
+                        def tagName = userInput.TAG_NAME.trim() // Trim leading/trailing spaces
 
-                // Change to the repository directory
-                dir('/yogi/git_automation') {
-                    // Create an annotated tag with a message
-                    sh "git tag -a ${tagName} -m 'Version ${tagName}'"
-                    // Push the created tag to the remote repository
-                    sh "git push origin ${tagName}"
-
-                    }
-                      else
-                    {
+                        // Change to the repository directory
+                        dir('/yogi/git_automation') {
+                            // Create an annotated tag with a message
+                            sh "git tag -a ${tagName} -m 'Version ${tagName}'"
+                            // Push the created tag to the remote repository
+                            sh "git push origin ${tagName}"
+                        }
+                    } else {
                         error('Tag name not provided. Tagging aborted.')
                     }
                 }
