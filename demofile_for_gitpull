@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         GIT_HOME = "/home/beast9949/git"
-        GIT_URL = "https://beast9949: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github.com/beast9949/git_automation.git"
+        GIT_URL = "https://beast9949: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@github.com/beast9949/git_automation.git"
     }
 
     stages {
@@ -65,7 +65,8 @@ pipeline {
                            cd /yogi/git_automation
                            echo $TAG_NAME
                            git tag -a $TAG_NAME -m "Version $TAG_NAME"
-                           git push origin $TAG_NAME
+                            git pull $GIT_URL
+                           git push $GIT_URL --tag
                          '''
                     } else {
                         error('Tag name not provided. Tagging aborted.')
