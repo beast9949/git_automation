@@ -36,7 +36,7 @@ pipeline {
             }
         }
 
-        stage('Pull and push from GitHub (Main Branch)') {
+        stage('Pull and push from GitHub (master Branch)') {
             steps {
                 sh  '''
                      cd /yogi/git_automation
