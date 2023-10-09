@@ -10,6 +10,7 @@ pipeline {
         GIT_HOME = "/home/beast9949/git"
         GIT_URL = "https://beast9949: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github.com/beast9949/git_automation.git"
     }
+
     stages {
         stage('Pull and push from GitHub') {
             steps {
@@ -35,18 +36,19 @@ pipeline {
         stage('Git checkout') {
             steps {
                 script {
-                sh '''
-                    cd /yogi/git_automation
-                    if [ "$BRANCH_NAME" != "master" ]; then
-                        git checkout $BRANCH_NAME
-                    fi
-                '''
+                    sh '''
+                        cd /yogi/git_automation
+                        if [ "$BRANCH_NAME" != "master" ]; then
+                            git checkout $BRANCH_NAME
+                        fi
+                    '''
+                }
             }
         }
-}
+
         stage('Pull and push from GitHub (master Branch)') {
             steps {
-                sh  '''
+                sh '''
                     cd /yogi/git_automation
                     git pull origin master
                 '''
@@ -72,13 +74,15 @@ pipeline {
                 }
             }
         }
-}
+
         stage('Pull a tag') {
             steps {
-                sh "cd /yogi/git_automation"
-                sh "git fetch --tags"
-                sh "git checkout ${TAG_NAME}"
+                sh '''
+                    cd /yogi/git_automation
+                    git fetch --tags
+                    git checkout ${TAG_NAME}
+                '''
             }
         }
     }
-
+}
