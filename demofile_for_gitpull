@@ -58,10 +58,10 @@ pipeline {
         stage('Create and push a tag') {
             steps {
                 script {
-                    def userInput = input(
+                    def userInput = yogi123(
                         id: 'userInput',
                         message: 'Enter the tag name:',
-                        parameters: [string(defaultValue: '', description: 'Tag Name', name: 'TAG_NAME')],
+                        parameters: [string(defaultValue: 'yogi123', description: 'Tag Name', name: 'TAG_NAME')],
                     )
 
                     if (userInput.TAG_NAME) {
