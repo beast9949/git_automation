@@ -19,6 +19,7 @@ pipeline {
                      ls -lsrt
                     #git config --global --add safe.directory /yogi/git_automation
                      git branch
+                    git stash
                     git pull
                      git pull $BRANCH_NAME
                  '''
