@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     parameters {
         string(name: 'TAG_NAME', defaultValue: '', description: 'Enter the tag name')
         string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'Enter the branch name')
