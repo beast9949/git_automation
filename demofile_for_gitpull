@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'TAG_NAME', defaultValue: 'yogi123', description: 'Enter the tag name')
+        string(name: 'TAG_NAME', defaultValue: '', description: 'Enter the tag name')
         string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'master')
     }
 
@@ -58,10 +58,10 @@ pipeline {
         stage('Create and push a tag') {
             steps {
                 script {
-                    def userInput = yogi123(
+                    def userInput = input(
                         id: 'userInput',
                         message: 'Enter the tag name:',
-                        parameters: [string(defaultValue: 'yogi123', description: 'Tag Name', name: 'TAG_NAME')],
+                        parameters: [string(defaultValue: '', description: 'Tag Name', name: 'TAG_NAME')],
                     )
 
                     if (userInput.TAG_NAME) {
