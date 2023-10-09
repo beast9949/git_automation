@@ -74,7 +74,9 @@ pipeline {
                     // Push the created tag to the remote repository
                     sh "git push origin ${tagName}"
 
-                    } else {
+                    }
+                      else
+                    {
                         error('Tag name not provided. Tagging aborted.')
                     }
                 }
