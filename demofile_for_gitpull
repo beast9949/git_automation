@@ -20,8 +20,12 @@ pipeline {
                     #git config --global --add safe.directory /yogi/git_automation
                      git branch
                     git stash
-                    git pull
+if($BRANCH_NAME != "master" || ($BRANCH_NAME != ""){
+ git pull
+}else{
                      git pull $BRANCH_NAME
+}
+                   
                  '''
             }
         }
