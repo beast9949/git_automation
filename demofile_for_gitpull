@@ -60,11 +60,12 @@ pipeline {
                 script {
                     def tagName = params.TAG_NAME.trim()
 
-                    if (tagName) {
+                    if (TAG_NAME) {
                         sh '''
                            cd /yogi/git_automation
-                           git tag -a ${tagName} -m "Version ${tagName}"
-                           git push origin ${tagName}
+                           echo $TAG_NAME
+                           git tag -a $TAG_NAME -m "Version $TAG_NAME"
+                           git push origin $TAG_NAME
                          '''
                     } else {
                         error('Tag name not provided. Tagging aborted.')
