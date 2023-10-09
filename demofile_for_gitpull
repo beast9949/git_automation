@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         string(name: 'TAG_NAME', defaultValue: '', description: 'Enter the tag name')
-        string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'Enter the branch name')
+        string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'master')
     }
 
     environment {
@@ -40,7 +40,7 @@ pipeline {
             steps {
                 sh  '''
                      cd /yogi/git_automation
-                    git pull origin main
+                    git pull origin master
                 '''
             }
         }
