@@ -61,7 +61,7 @@ pipeline {
                     def userInput = input(
                         id: 'userInput',
                         message: 'Enter the tag name:',
-                        parameters: [string(defaultValue: '', description: 'Tag Name', name: 'TAG_NAME')],
+                        parameters: [string(defaultValue:'', description:'Tag Name', name:'TAG_NAME')],
                     )
 
                     if (userInput.TAG_NAME) {
