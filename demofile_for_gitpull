@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         string(name: 'TAG_NAME', defaultValue: '', description: 'Enter the tag name')
-        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Enter the branch name')
+        string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'Enter the branch name')
     }
 
     environment {
@@ -15,20 +15,20 @@ pipeline {
             steps {
                 sh '''
                      whoami
-                     $WORKSPACE
-                    ls -lsrt
-                    git branch
-                    git checkout $BRANCH_NAME
+                     cd /yogi/git_automation
+                     ls -lsrt
+                     git branch
+                     git checkout $BRANCH_NAME
                      git pull $BRANCH_NAME
-                '''
+                 '''
             }
         }
 
         stage('Git checkout') {
             steps {
                 sh '''
-                    cd /root/dir1/git_automation
-                    if [ "$BRANCH_NAME" != "main" ]; then
+                    cd /yogi/git_automation
+                    if [ "$BRANCH_NAME" != "master" ]; then
                     git checkout $BRANCH_NAME
                     fi
                 '''
@@ -38,7 +38,7 @@ pipeline {
         stage('Pull and push from GitHub (Main Branch)') {
             steps {
                 sh  '''
-                    cd /root/dir1/git_automation
+                     cd /yogi/git_automation
                     git pull origin main
                 '''
             }
@@ -54,7 +54,7 @@ pipeline {
                     )
 
                     if (userInput.TAG_NAME) {
-                        sh "$WORKSPACE"
+                        sh " cd /yogi/git_automation"
                         sh "git tag -a ${userInput.TAG_NAME} -m 'Version ${userInput.TAG_NAME}'"
                         sh "git push origin --tags"
                     } else {
