@@ -17,7 +17,7 @@ pipeline {
                      whoami
                      cd /yogi/git_automation
                      ls -lsrt
-                     git config --global --add safe.directory /yogi/git_automation
+                    #git config --global --add safe.directory /yogi/git_automation
                      git branch
                      git pull $BRANCH_NAME
                  '''
