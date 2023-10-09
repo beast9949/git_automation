@@ -45,6 +45,7 @@ pipeline {
 
         stage('Pull and push from GitHub (master Branch)') {
             steps {
+                script {
                 sh  '''
                     cd /yogi/git_automation
                     git pull origin master
@@ -71,7 +72,7 @@ pipeline {
                 }
             }
         }
-
+}
         stage('Pull a tag') {
             steps {
                 sh "cd /yogi/git_automation"
