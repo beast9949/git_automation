@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         GIT_HOME ="/home/beast9949/git"
-        GIT_URL ="https://beast9949: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@github.com/beast9949/git_automation.git"
+        
     }
 
     stages {
@@ -58,18 +58,19 @@ pipeline {
             steps {
                 script {
                     def tagName = params.TAG_NAME.trim()
-
+                    withCredentials([gitUsernamePassword(credentialsId: 'beast9949', gitToolName: 'Default')]) {
                     if (TAG_NAME) {
                         sh '''
                            cd /yogi/git_automation
                            echo $TAG_NAME
                            git tag -a $TAG_NAME -m "Version $TAG_NAME"
-                            git pull $GIT_URL
-                           git push $GIT_URL --tags
+                            git pull
+                           git push origin $TAG_NAME
                          '''
                     } else {
                         error('Tag name not provided. Tagging aborted.')
                     }
+                       } 
                 }
             }
         }
