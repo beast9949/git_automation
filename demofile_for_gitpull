@@ -35,8 +35,8 @@ pipeline {
 
         stage('Git checkout') {
             steps {
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'beast9949', url: 'https://github.com/beast9949/git_automation.git']])
                 script {
-               checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'beast9949', url: 'https://github.com/beast9949/git_automation.git']])
                     sh '''
                         cd /yogi/git_automation
                         if [ "$BRANCH_NAME" != "master" ]; then
