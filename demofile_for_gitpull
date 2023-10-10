@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         GIT_HOME ="/home/beast9949/git"
-        GIT_URL ="https://beast9949:$git_pat@github.com/beast9949/git_automation.git"
+        GIT_URL ="https://beast9949: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@github.com/beast9949/git_automation.git"
     }
 
     stages {
@@ -16,7 +16,6 @@ pipeline {
                 script {
                     sh '''
                         whoami
-                        printenv
                         cd /yogi/git_automation
                         ls -lsrt
                         # git config --global --add safe.directory /yogi/git_automation
